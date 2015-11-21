@@ -74,8 +74,6 @@ namespace DD.Caas.SyncAgent
 			try
 			{
 				accountDetail = await _httpClient.GetAsync<Account>(AccountRequest);
-
-				ActorEventSource.Raise.ActorMessage(this, "Initialisation complete (targeting organisation '{0}').", accountDetail.OrganizationId);
 			}
 			catch (Exception getClientDetailError)
 			{
@@ -88,6 +86,8 @@ namespace DD.Caas.SyncAgent
 			State.ComputeOrganizationId = accountDetail.OrganizationId;
 			State.IsInitialized = true;
 			await SaveStateAsync();
+			
+			ActorEventSource.Raise.ActorMessage(this, "Initialisation complete (targeting organisation '{0}').", accountDetail.OrganizationId);
 
 			return State.ComputeOrganizationId;
 		}
