@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="CaaS.Sync.AppType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+   <Parameters>
+      <Parameter Name="ComputeApiClientActorService_PartitionCount" DefaultValue="10" />
+      <Parameter Name="ComputeApiClientActorService_MinReplicaSetSize" DefaultValue="2" />
+      <Parameter Name="ComputeApiClientActorService_TargetReplicaSetSize" DefaultValue="3" />
+   </Parameters>
+   <ServiceManifestImport>
+      <ServiceManifestRef ServiceManifestName="DD.Caas.SyncAgentPkg" ServiceManifestVersion="1.0.0" />
+   </ServiceManifestImport>
+   <DefaultServices>
+      <Service Name="ComputeApiClientActorService" GeneratedIdRef="a7f19536-c491-4da6-b709-cc6f48221c7e">
+         <StatefulService ServiceTypeName="ComputeApiClientActorServiceType" TargetReplicaSetSize="[ComputeApiClientActorService_TargetReplicaSetSize]" MinReplicaSetSize="[ComputeApiClientActorService_MinReplicaSetSize]">
+            <UniformInt64Partition PartitionCount="[ComputeApiClientActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+         </StatefulService>
+      </Service>
+   </DefaultServices>
+</ApplicationManifest>
