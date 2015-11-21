@@ -20,7 +20,7 @@ namespace DD.Caas.SyncAgent
 		/// <summary>
 		///     The request template for retrieving CaaS account details.
 		/// </summary>
-		static readonly HttpRequestBuilder<Unit> AccountRequest = StandardHttpRequest.Xml(new Uri("myaccount"), useXmlSerializer: true);
+		static readonly HttpRequestBuilder<Unit> AccountRequest = StandardHttpRequest.Xml("myaccount", useXmlSerializer: true);
 
 		/// <summary>
 		///     The HTTP client message handler used to customise <see cref="HttpClient" /> behaviour.
